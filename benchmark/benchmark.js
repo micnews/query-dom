@@ -17,6 +17,11 @@ const parsers = {
 };
 
 Object.keys(parsers).forEach((key) => {
+  // warm up
+  for (let i = 0; i < 20; ++i) {
+    parsers[key](input);
+  }
+
   const start = new Date();
   let count = 0;
   while (new Date() - start < 2000) {
