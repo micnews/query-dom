@@ -4,7 +4,11 @@
   "description": "read-only & somewhat standards compliant subset of the DOM",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "semistandard | snazzy && ava",
+    "benchmark:build": "mkdir -p dist && babel benchmark/benchmark.js --out-file dist/benchmark.js",
+    "benchmark": "npm-run-all --parallel benchmark:build build && node dist/benchmark.js",
+    "build": "mkdir -p dist && babel index.js --out-file dist/index.js",
+    "prerelease": "rm -r dist && npm run build"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,21 @@
   "bugs": {
     "url": "https://github.com/micnews/read-only-dom/issues"
   },
-  "homepage": "https://github.com/micnews/read-only-dom#readme"
+  "homepage": "https://github.com/micnews/read-only-dom#readme",
+  "devDependencies": {
+    "ava": "^0.11.0",
+    "babel-cli": "^6.4.5",
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "jsdom": "^8.0.1",
+    "minidom": "^1.0.0",
+    "semistandard": "^7.0.5",
+    "snazzy": "^2.0.1"
+  },
+  "dependencies": {
+    "dom-style-parser": "^1.0.0",
+    "es6-map": "^0.1.3",
+    "es6-set": "^0.1.4",
+    "parse5": "^2.1.5"
+  }
 }
