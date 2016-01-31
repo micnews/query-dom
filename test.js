@@ -22,3 +22,13 @@ test('nested has correct tagNames & nodeNames', t => {
   t.same(actual[0].childNodes[0].tagName, 'SPAN');
   t.same(actual[0].childNodes[0].nodeName, 'SPAN');
 });
+
+test('getAttribute()', t => {
+  const actual = readOnlyDom('<div foo="bar"></div>');
+  t.same(actual[0].getAttribute('does-not-exists'), null,
+    'none existing attribute');
+  t.same(actual[0].getAttribute('does-not-exists'), null,
+    'none existing attribute (cached)');
+  t.same(actual[0].getAttribute('foo'), 'bar', 'existing attribute');
+  t.same(actual[0].getAttribute('foo'), 'bar', 'existing attribute (cached)');
+});
