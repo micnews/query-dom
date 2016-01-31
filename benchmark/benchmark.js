@@ -13,7 +13,7 @@ const parseParse5 = () => {
   return parse5.parse(input);
 };
 const parsers = {
-  jsdom: parseJsdom, minidom, readOnlyDom, parse5: parseParse5
+  readOnlyDom, parse5: parseParse5, minidom, jsdom: parseJsdom
 };
 
 Object.keys(parsers).forEach((key) => {
