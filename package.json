@@ -1,0 +1,19 @@
+{
+  "name": "read-only-dom",
+  "version": "0.0.0",
+  "description": "read-only & somewhat standards compliant subset of the DOM",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micnews/read-only-dom.git"
+  },
+  "author": "mic.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micnews/read-only-dom/issues"
+  },
+  "homepage": "https://github.com/micnews/read-only-dom#readme"
+}
