@@ -1,6 +1,6 @@
 import parse5 from 'parse5';
 
-export default function (html) {
+const parse = (html) => {
   const childNodes = parse5.parseFragment(html).childNodes;
   const queue = childNodes.slice();
 
@@ -19,4 +19,6 @@ export default function (html) {
   }
 
   return childNodes;
-}
+};
+
+module.exports = parse;
