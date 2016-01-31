@@ -32,3 +32,13 @@ test('getAttribute()', t => {
   t.same(actual[0].getAttribute('foo'), 'bar', 'existing attribute');
   t.same(actual[0].getAttribute('foo'), 'bar', 'existing attribute (cached)');
 });
+
+test('hasAttribute()', t => {
+  const actual = readOnlyDom('<div foo="bar"></div>');
+  t.same(actual[0].hasAttribute('does-not-exists'), false,
+    'none existing attribute');
+  t.same(actual[0].hasAttribute('does-not-exists'), false,
+    'none existing attribute (cached)');
+  t.same(actual[0].hasAttribute('foo'), true, 'existing attribute');
+  t.same(actual[0].hasAttribute('foo'), true, 'existing attribute (cached)');
+});

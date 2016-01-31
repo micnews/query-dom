@@ -1,6 +1,7 @@
 import parse5 from 'parse5';
 import assign from 'object-assign';
 import toFastProperties from 'to-fast-properties';
+import Set from 'es6-set';
 
 const treeAdapter = assign({}, parse5.treeAdapters.default);
 
@@ -13,27 +14,33 @@ class Element {
     this.parentNode = null;
     this.attrs = attrs;
     this._attributes = {};
+    this._attributeNames = new Set();
     this._attributesCached = false;
   }
 
-  _getAttribute (name) {
-    const {_attributes, _attributesCached, attrs} = this;
+  _assertAttributesCached () {
+    const {_attributes, _attributesCached, _attributeNames, attrs} = this;
     if (_attributesCached) {
-      return _attributes[name];
+      return;
     }
 
     this._attributesCached = true;
 
     for (let i = 0; i < attrs.length; ++i) {
       _attributes[attrs[i].name] = attrs[i].value;
+      _attributeNames.add(attrs[i].name);
     }
-
-    return _attributes[name];
   }
 
   getAttribute (name) {
-    const value = this._getAttribute(name);
+    this._assertAttributesCached();
+    const value = this._attributes[name];
     return value === undefined ? null : value;
+  }
+
+  hasAttribute (name) {
+    this._assertAttributesCached();
+    return this._attributeNames.has(name);
   }
 }
 
