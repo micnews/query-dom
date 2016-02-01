@@ -42,3 +42,27 @@ test('hasAttribute()', t => {
   t.same(actual[0].hasAttribute('foo'), true, 'existing attribute');
   t.same(actual[0].hasAttribute('foo'), true, 'existing attribute (cached)');
 });
+
+test('getElementsByTagName()', t => {
+  const actual = readOnlyDom(`<div>
+    <foo></foo>
+    <beep><foo></foo></beep>
+  </div>`)[0].getElementsByTagName('foo');
+  t.same(actual.length, 2);
+  t.same(actual[0].tagName, 'FOO');
+  t.same(actual[0].parentNode.tagName, 'DIV');
+  t.same(actual[1].tagName, 'FOO');
+  t.same(actual[1].parentNode.tagName, 'BEEP');
+});
+
+test('getElementsByTagName() tricky', t => {
+  const actual = readOnlyDom(`<div>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`)[0].getElementsByTagName('foo');
+  t.same(actual.length, 2);
+  t.same(actual[0].tagName, 'FOO');
+  t.same(actual[0].parentNode.tagName, 'BEEP');
+  t.same(actual[1].tagName, 'FOO');
+  t.same(actual[1].parentNode.tagName, 'DIV');
+});

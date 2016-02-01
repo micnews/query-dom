@@ -4,6 +4,18 @@ import toFastProperties from 'to-fast-properties';
 
 const treeAdapter = assign({}, parse5.treeAdapters.default);
 
+function getElementsByTagName (childNodes, tagName, result) {
+  for (var i = 0; i < childNodes.length; i++) {
+    let elm = childNodes[i];
+    if (elm.tagName === tagName) {
+      result.push(elm);
+    }
+    if (elm.childNodes) {
+      getElementsByTagName(elm.childNodes, tagName, result);
+    }
+  }
+}
+
 function Element (tagName, namespaceURI, attrs) {
   this.tagName = tagName;
   this.nodeName = tagName;
@@ -27,6 +39,15 @@ Element.prototype = {
     for (let i = 0; i < attrs.length; ++i) {
       _attributes[attrs[i].name] = attrs[i].value;
     }
+  },
+
+  getElementsByTagName (tagName) {
+    tagName = tagName.toUpperCase();
+    const result = [];
+
+    getElementsByTagName(this.childNodes, tagName, result);
+
+    return result;
   },
 
   getAttribute (name) {
