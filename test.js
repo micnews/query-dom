@@ -1,6 +1,7 @@
 import test from 'ava';
 import 'babel-core/register';
 import readOnlyDom from './lib';
+import tsml from 'tsml';
 
 test('tagNames & nodeNames are upper case', t => {
   const actual = readOnlyDom('<div></div><DIV></DIV>');
@@ -65,4 +66,21 @@ test('getElementsByTagName() tricky', t => {
   t.same(actual[0].parentNode.tagName, 'BEEP');
   t.same(actual[1].tagName, 'FOO');
   t.same(actual[1].parentNode.tagName, 'DIV');
+});
+
+test('classList.contains()', t => {
+  const actual = readOnlyDom(tsml`
+    <div></div>
+    <div class="foo"></div>
+    <div class="foo bar"></div>
+  `);
+
+  t.same(actual.length, 3);
+
+  t.notOk(actual[0].classList.contains('foo'));
+  t.ok(actual[1].classList.contains('foo'));
+  t.notOk(actual[1].classList.contains('bar'));
+  t.ok(actual[2].classList.contains('foo'));
+  t.ok(actual[2].classList.contains('bar'));
+  t.notOk(actual[2].classList.contains('bas'));
 });

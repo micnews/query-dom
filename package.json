@@ -29,7 +29,8 @@
     "minidom": "^1.0.0",
     "npm-run-all": "^1.5.1",
     "semistandard": "^7.0.5",
-    "snazzy": "^2.0.1"
+    "snazzy": "^2.0.1",
+    "tsml": "^1.0.1"
   },
   "dependencies": {
     "dom-style-parser": "^1.0.0",

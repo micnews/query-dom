@@ -2,10 +2,10 @@ import fs from 'fs';
 
 import jsdom from 'jsdom';
 import minidom from 'minidom';
-import readOnlyDom from '../dist/index';
+import readOnlyDom from '../lib/index';
 import parse5 from 'parse5';
 
-const input = fs.readFileSync(__dirname + '/../benchmark/example.html', 'utf8');
+const input = fs.readFileSync(__dirname + '/../../benchmark/example.html', 'utf8');
 const parseJsdom = () => {
   return jsdom.jsdom(input);
 };
