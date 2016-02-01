@@ -33,6 +33,7 @@
     "tsml": "^1.0.1"
   },
   "dependencies": {
+    "camelcase-css": "^1.0.0",
     "dom-style-parser": "^1.0.0",
     "es6-set": "^0.1.4",
     "object-assign": "^4.0.1",
