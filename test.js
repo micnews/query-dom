@@ -7,21 +7,21 @@ test('tagNames & nodeNames are upper case', t => {
   const actual = readOnlyDom('<div></div><DIV></DIV>');
 
   t.same(actual.length, 2);
-  t.same(actual[0].tagName, 'DIV');
-  t.same(actual[0].nodeName, 'DIV');
-  t.same(actual[1].tagName, 'DIV');
-  t.same(actual[1].nodeName, 'DIV');
+  t.same(actual[0].tagName, 'div');
+  t.same(actual[0].nodeName, 'div');
+  t.same(actual[1].tagName, 'div');
+  t.same(actual[1].nodeName, 'div');
 });
 
 test('nested has correct tagNames & nodeNames', t => {
   const actual = readOnlyDom('<div><span></span></div>');
 
   t.same(actual.length, 1);
-  t.same(actual[0].tagName, 'DIV');
-  t.same(actual[0].nodeName, 'DIV');
+  t.same(actual[0].tagName, 'div');
+  t.same(actual[0].nodeName, 'div');
 
-  t.same(actual[0].childNodes[0].tagName, 'SPAN');
-  t.same(actual[0].childNodes[0].nodeName, 'SPAN');
+  t.same(actual[0].childNodes[0].tagName, 'span');
+  t.same(actual[0].childNodes[0].nodeName, 'span');
 });
 
 test('getAttribute()', t => {
@@ -50,10 +50,10 @@ test('getElementsByTagName()', t => {
     <beep><foo></foo></beep>
   </div>`)[0].getElementsByTagName('foo');
   t.same(actual.length, 2);
-  t.same(actual[0].tagName, 'FOO');
-  t.same(actual[0].parentNode.tagName, 'DIV');
-  t.same(actual[1].tagName, 'FOO');
-  t.same(actual[1].parentNode.tagName, 'BEEP');
+  t.same(actual[0].tagName, 'foo');
+  t.same(actual[0].parentNode.tagName, 'div');
+  t.same(actual[1].tagName, 'foo');
+  t.same(actual[1].parentNode.tagName, 'beep');
 });
 
 test('getElementsByTagName() tricky', t => {
@@ -62,10 +62,10 @@ test('getElementsByTagName() tricky', t => {
     <foo></foo>
   </div>`)[0].getElementsByTagName('foo');
   t.same(actual.length, 2);
-  t.same(actual[0].tagName, 'FOO');
-  t.same(actual[0].parentNode.tagName, 'BEEP');
-  t.same(actual[1].tagName, 'FOO');
-  t.same(actual[1].parentNode.tagName, 'DIV');
+  t.same(actual[0].tagName, 'foo');
+  t.same(actual[0].parentNode.tagName, 'beep');
+  t.same(actual[1].tagName, 'foo');
+  t.same(actual[1].parentNode.tagName, 'div');
 });
 
 test('classList.contains()', t => {
