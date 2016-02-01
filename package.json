@@ -1,7 +1,7 @@
 {
-  "name": "read-only-dom",
+  "name": "query-dom",
   "version": "0.0.0",
-  "description": "read-only & somewhat standards compliant subset of the DOM",
+  "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
   "scripts": {
     "test": "semistandard | snazzy && ava",
