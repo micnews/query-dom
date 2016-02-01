@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/micnews/read-only-dom.git"
+    "url": "git+https://github.com/micnews/query-dom.git"
   },
   "author": "mic.com",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/micnews/read-only-dom/issues"
+    "url": "https://github.com/micnews/query-dom/issues"
   },
-  "homepage": "https://github.com/micnews/read-only-dom#readme",
+  "homepage": "https://github.com/micnews/query-dom#readme",
   "devDependencies": {
     "ava": "^0.11.0",
     "babel-cli": "^6.4.5",
