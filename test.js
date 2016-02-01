@@ -1,6 +1,6 @@
 import test from 'ava';
 import 'babel-core/register';
-import readOnlyDom from './';
+import readOnlyDom from './lib';
 
 test('tagNames & nodeNames are upper case', t => {
   const actual = readOnlyDom('<div></div><DIV></DIV>');
