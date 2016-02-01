@@ -1,4 +1,4 @@
-# query-dom [![Build Status](https://travis-ci.org/micnews/read-only-dom.png?branch=master)](https://travis-ci.org/micnews/read-only-dom)
+# query-dom [![Build Status](https://travis-ci.org/micnews/query-dom.png?branch=master)](https://travis-ci.org/micnews/query-dom)
 
 query-focused &amp; somewhat standards compliant subset of the DOM
 
@@ -13,7 +13,7 @@ npm install query-dom --save
 ## Usage
 
 ```js
-import queryDom from './';
+import queryDom from 'query-dom';
 
 const elm = queryDom('<div><foo style="font-size: 12px" class="bar"></foo></div>')[0];
 const child = elm.getElementsByTagName('foo')[0];
@@ -33,7 +33,6 @@ npm test
 ## Dependencies
 
 - [camelcase-css](https://github.com/stevenvachon/camelcase-css): Convert a dash-separated CSS property to a camelCased DOM property.
-- [dom-style-parser](https://github.com/stevenvachon/dom-style-parser): Parse inline CSS to an Object with DOM properties.
 - [es6-set](https://github.com/medikoo/es6-set): ECMAScript6 Set polyfill
 - [object-assign](https://github.com/sindresorhus/object-assign): ES6 Object.assign() ponyfill
 - [parse5](https://github.com/inikulin/parse5): WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.js
