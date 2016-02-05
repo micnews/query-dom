@@ -4,7 +4,7 @@
   "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
   "scripts": {
-    "test": "semistandard | snazzy && ava",
+    "test": "semistandard | snazzy && nyc ava",
     "benchmark:build": "mkdir -p dist && babel benchmark --out-dir dist/benchmark",
     "benchmark": "npm-run-all --parallel benchmark:build build && node dist/benchmark/benchmark.js",
     "build": "babel lib --out-dir dist/lib",
@@ -29,6 +29,7 @@
     "jsdom": "^8.0.1",
     "minidom": "^1.0.0",
     "npm-run-all": "^1.5.1",
+    "nyc": "^5.5.0",
     "semistandard": "^7.0.5",
     "snazzy": "^2.0.1",
     "tsml": "^1.0.1"
