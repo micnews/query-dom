@@ -114,3 +114,15 @@ test('style', t => {
   t.same(actual2, expected2);
   t.same(actual3, expected3);
 });
+
+test('text element', t => {
+  const expectedNodeName = '#text';
+  const expectedData = 'beep boop';
+
+  const actual = readOnlyDom('beep boop')[0];
+  const actualNodeName = actual.nodeName;
+  const actualData = actual.data;
+
+  t.is(actualNodeName, expectedNodeName);
+  t.is(actualData, expectedData);
+});
