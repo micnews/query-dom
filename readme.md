@@ -49,6 +49,7 @@ npm test
 - [minidom](https://github.com/montagejs/minidom): Small DOM level 1 implementation
 - [npm-run-all](https://github.com/mysticatea/npm-run-all): A CLI tool to run multiple npm-scripts in parallel or sequential.
 - [nyc](https://github.com/bcoe/nyc): a code coverage tool that works well with subprocesses.
+- [package-json-to-readme](https://github.com/zeke/package-json-to-readme): Generate a README.md from package.json contents
 - [semistandard](https://github.com/Flet/semistandard): All the goodness of `feross/standard` with semicolons sprinkled on top.
 - [snazzy](https://github.com/feross/snazzy): Format JavaScript Standard Style as Stylish (i.e. snazzy) output
 - [tsml](https://github.com/rvagg/tsml): ES6 template string tag for multi-line cleaning - squash multi-line strings into a single line
