@@ -85,9 +85,16 @@ test('classList.contains()', t => {
   t.notOk(actual[2].classList.contains('bas'));
 });
 
-test('style', t => {
+test('style - single statement', t => {
+  const actual = queryDom('<div style="font-size: 14px"></div>')[0].style;
+  const expected = {
+    fontSize: '14px'
+  };
+  t.same(actual, expected);
+});
+
+test('style - multiple statements', t => {
   const actual = queryDom(tsml`
-    <div style="font-size: 14px"></div>
     <div style="
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
@@ -96,25 +103,26 @@ test('style', t => {
       border-color: ;
       : red;
     "></div>
-    <div></div>
-  `);
-  const actual1 = actual[0].style;
-  const actual2 = actual[1].style;
-  const actual3 = actual[2].style;
-  const expected1 = {
-    fontSize: '14px'
-  };
-  const expected2 = {
+  `)[0].style;
+  const expected = {
     WebkitBorderRadius: '10px',
     MozBorderRadius: '10px',
     msBorderRadius: '10px',
     borderRadius: '10px'
   };
-  const expected3 = {};
+  t.same(actual, expected);
+});
 
-  t.same(actual1, expected1);
-  t.same(actual2, expected2);
-  t.same(actual3, expected3);
+test('style - no style', t => {
+  const actual = queryDom('<div></div>')[0].style;
+  const expected = {};
+  t.same(actual, expected);
+});
+
+test('style - invalid', t => {
+  const actual = queryDom('<div style="foo"></div>')[0].style;
+  const expected = {};
+  t.same(actual, expected);
 });
 
 test('text element', t => {
