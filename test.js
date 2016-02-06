@@ -93,6 +93,8 @@ test('style', t => {
       -moz-border-radius: 10px;
       -ms-border-radius: 10px;
       border-radius: 10px;
+      border-color: ;
+      : red;
     "></div>
     <div></div>
   `);
