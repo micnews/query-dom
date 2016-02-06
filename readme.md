@@ -44,6 +44,7 @@ npm test
 - [babel-cli](https://github.com/babel/babel/tree/master/packages): Babel command line.
 - [babel-core](https://github.com/babel/babel/tree/master/packages): Babel compiler core.
 - [babel-preset-es2015](https://github.com/babel/babel/tree/master/packages): Babel preset for all es2015 plugins.
+- [devtool](https://github.com/Jam3/devtool): runs Node.js programs through Chromium DevTools
 - [jsdom](https://github.com/tmpvar/jsdom): A JavaScript implementation of the DOM and HTML standards
 - [minidom](https://github.com/montagejs/minidom): Small DOM level 1 implementation
 - [npm-run-all](https://github.com/mysticatea/npm-run-all): A CLI tool to run multiple npm-scripts in parallel or sequential.
