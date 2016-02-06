@@ -29,7 +29,7 @@
     "jsdom": "^8.0.1",
     "minidom": "^1.0.0",
     "npm-run-all": "^1.5.1",
-    "nyc": "^5.5.0",
+    "nyc": "^5.6.0",
     "package-json-to-readme": "^1.5.0",
     "semistandard": "^7.0.5",
     "snazzy": "^2.0.1",
