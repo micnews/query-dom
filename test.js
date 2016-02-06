@@ -1,10 +1,10 @@
 import test from 'ava';
 import 'babel-core/register';
-import readOnlyDom from './lib';
+import queryDom from './lib';
 import tsml from 'tsml';
 
 test('tagNames & nodeNames are upper case', t => {
-  const actual = readOnlyDom('<div></div><DIV></DIV>');
+  const actual = queryDom('<div></div><DIV></DIV>');
 
   t.same(actual.length, 2);
   t.same(actual[0].tagName, 'div');
@@ -14,7 +14,7 @@ test('tagNames & nodeNames are upper case', t => {
 });
 
 test('nested has correct tagNames & nodeNames', t => {
-  const actual = readOnlyDom('<div><span></span></div>');
+  const actual = queryDom('<div><span></span></div>');
 
   t.same(actual.length, 1);
   t.same(actual[0].tagName, 'div');
@@ -25,7 +25,7 @@ test('nested has correct tagNames & nodeNames', t => {
 });
 
 test('getAttribute()', t => {
-  const actual = readOnlyDom('<div foo="bar"></div>');
+  const actual = queryDom('<div foo="bar"></div>');
   t.same(actual[0].getAttribute('does-not-exists'), null,
     'none existing attribute');
   t.same(actual[0].getAttribute('does-not-exists'), null,
@@ -35,7 +35,7 @@ test('getAttribute()', t => {
 });
 
 test('hasAttribute()', t => {
-  const actual = readOnlyDom('<div foo="bar"></div>');
+  const actual = queryDom('<div foo="bar"></div>');
   t.same(actual[0].hasAttribute('does-not-exists'), false,
     'none existing attribute');
   t.same(actual[0].hasAttribute('does-not-exists'), false,
@@ -45,7 +45,7 @@ test('hasAttribute()', t => {
 });
 
 test('getElementsByTagName()', t => {
-  const actual = readOnlyDom(`<div>
+  const actual = queryDom(`<div>
     <foo></foo>
     <beep><foo></foo></beep>
   </div>`)[0].getElementsByTagName('foo');
@@ -57,7 +57,7 @@ test('getElementsByTagName()', t => {
 });
 
 test('getElementsByTagName() tricky', t => {
-  const actual = readOnlyDom(`<div>
+  const actual = queryDom(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
   </div>`)[0].getElementsByTagName('foo');
@@ -69,7 +69,7 @@ test('getElementsByTagName() tricky', t => {
 });
 
 test('classList.contains()', t => {
-  const actual = readOnlyDom(tsml`
+  const actual = queryDom(tsml`
     <div></div>
     <div class="foo"></div>
     <div class="foo bar"></div>
@@ -86,7 +86,7 @@ test('classList.contains()', t => {
 });
 
 test('style', t => {
-  const actual = readOnlyDom(tsml`
+  const actual = queryDom(tsml`
     <div style="font-size: 14px"></div>
     <div style="
       -webkit-border-radius: 10px;
@@ -119,7 +119,7 @@ test('text element', t => {
   const expectedNodeName = '#text';
   const expectedData = 'beep boop';
 
-  const actual = readOnlyDom('beep boop')[0];
+  const actual = queryDom('beep boop')[0];
   const actualNodeName = actual.nodeName;
   const actualData = actual.data;
 
