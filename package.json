@@ -1,6 +1,6 @@
 {
   "name": "query-dom",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
   "scripts": {
