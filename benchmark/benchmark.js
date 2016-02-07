@@ -30,7 +30,7 @@ count = 0;
 while (new Date() - start < 2000) {
   for (let i = 0; i < 1000; ++i) {
     count++;
-    dom[0].getElementsByTagName('div').length
+    dom[0].getElementsByTagName('div');
   }
 }
 diff = (new Date() - start) / count;
