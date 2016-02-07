@@ -10,8 +10,8 @@
     "benchmark:devtool": "npm-run-all --parallel benchmark:build build && devtool dist/benchmark/benchmark.js",
     "build": "babel lib --out-dir dist/lib",
     "prepublish": "rm -rf dist && npm run build",
-    "posttest": "readme package.json --travis > readme.md"
-  },
+    "posttest": "readme package.json --travis > readme.md",
+    "open-coverage": "nyc ava && nyc report --reporter=lcov && open coverage/lcov-report/index.html"  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/micnews/query-dom.git"
@@ -39,7 +39,6 @@
   },
   "dependencies": {
     "camelcase-css": "^1.0.0",
-    "es6-set": "^0.1.4",
     "object-assign": "^4.0.1",
     "parse5": "^2.1.5",
     "to-fast-properties": "^1.0.1"

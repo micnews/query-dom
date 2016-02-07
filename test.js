@@ -85,6 +85,15 @@ test('classList.contains()', t => {
   t.notOk(actual[2].classList.contains('bas'));
 });
 
+test('classList.contains() whitespace in className', t => {
+  const actual = queryDom('<div class="  foo   bar  "/>')[0].classList;
+
+  t.ok(actual.contains('foo'));
+  t.ok(actual.contains('bar'));
+  t.notOk(actual.contains(''));
+  t.notOk(actual.contains(' '));
+});
+
 test('style - single statement', t => {
   const actual = queryDom('<div style="font-size: 14px"></div>')[0].style;
   const expected = {

@@ -33,7 +33,6 @@ npm test
 ## Dependencies
 
 - [camelcase-css](https://github.com/stevenvachon/camelcase-css): Convert a dash-separated CSS property to a camelCased DOM property.
-- [es6-set](https://github.com/medikoo/es6-set): ECMAScript6 Set polyfill
 - [object-assign](https://github.com/sindresorhus/object-assign): ES6 Object.assign() ponyfill
 - [parse5](https://github.com/inikulin/parse5): WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.js
 - [to-fast-properties](https://github.com/sindresorhus/to-fast-properties): Force V8 to use fast properties for an object
