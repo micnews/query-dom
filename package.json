@@ -1,6 +1,6 @@
 {
   "name": "query-dom",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "build": "babel lib --out-dir dist/lib",
     "prepublish": "rm -rf dist && npm run build",
     "posttest": "readme package.json --travis > readme.md",
-    "open-coverage": "nyc ava && nyc report --reporter=lcov && open coverage/lcov-report/index.html"  },
+    "open-coverage": "nyc ava && nyc report --reporter=lcov && open coverage/lcov-report/index.html"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/micnews/query-dom.git"
