@@ -29,7 +29,7 @@
     "babel-core": "^6.4.5",
     "babel-preset-es2015": "^6.3.13",
     "devtool": "^1.7.6",
-    "jsdom": "^8.0.1",
+    "jsdom": "^8.0.3",
     "minidom": "^1.0.0",
     "npm-run-all": "^1.5.1",
     "nyc": "^5.5.0",
