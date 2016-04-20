@@ -36,6 +36,12 @@ test('getAttribute()', t => {
   t.is(actual[0].getAttribute('foo'), 'bar', 'existing attribute (cached)');
 });
 
+test('attributes', t => {
+  const actual = queryDom('<div foo="bar"></div>')[0].attributes;
+  const expected = [{name: 'foo', value: 'bar'}];
+  t.deepEqual(actual, expected);
+});
+
 test('hasAttribute()', t => {
   const actual = queryDom('<div foo="bar"></div>');
   t.is(
