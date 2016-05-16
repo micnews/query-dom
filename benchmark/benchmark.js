@@ -1,7 +1,10 @@
 import queryDom from '../lib/index';
-import fs from 'fs';
+import {readFileSync} from 'fs';
+import {join} from 'path';
 
-const input = fs.readFileSync(__dirname + '/../../benchmark/example.html', 'utf8');
+const input = readFileSync(join(
+  __dirname, '/../../benchmark/example.html', 'utf8'
+));
 
 if (console.profile) {
   console.profile('parse');
