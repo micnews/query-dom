@@ -3,7 +3,7 @@ import 'babel-core/register';
 import queryDom from './lib';
 import tsml from 'tsml';
 
-test('tagNames & nodeNames are upper case', t => {
+test('tagNames & nodeNames are lower case', t => {
   const actual = queryDom('<div></div><DIV></DIV>');
 
   t.is(actual.length, 2);
