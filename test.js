@@ -1,10 +1,10 @@
 import test from 'ava';
 import 'babel-core/register';
-import queryDom from './lib';
+import {parse, parseFragment} from './lib';
 import tsml from 'tsml';
 
 test('tagNames & nodeNames are lower case', t => {
-  const actual = queryDom('<div></div><DIV></DIV>');
+  const actual = parseFragment('<div></div><DIV></DIV>').childNodes;
 
   t.is(actual.length, 2);
   t.is(actual[0].tagName, 'div');
@@ -14,7 +14,7 @@ test('tagNames & nodeNames are lower case', t => {
 });
 
 test('nested has correct tagNames & nodeNames', t => {
-  const actual = queryDom('<div><span></span></div>');
+  const actual = parseFragment('<div><span></span></div>').childNodes;
 
   t.is(actual.length, 1);
   t.is(actual[0].tagName, 'div');
@@ -25,7 +25,7 @@ test('nested has correct tagNames & nodeNames', t => {
 });
 
 test('getAttribute()', t => {
-  const actual = queryDom('<div foo="bar"></div>');
+  const actual = parseFragment('<div foo="bar"></div>').childNodes;
   t.is(actual[0].getAttribute('does-not-exists'), null, 'none existing attribute');
   t.is(
     actual[0].getAttribute('does-not-exists'),
@@ -37,32 +37,33 @@ test('getAttribute()', t => {
 });
 
 test('attributes', t => {
-  const actual = queryDom('<div foo="bar"></div>')[0].attributes;
+  const actual = parseFragment('<div foo="bar"></div>').childNodes[0].attributes;
   const expected = [{name: 'foo', value: 'bar'}];
   t.deepEqual(actual, expected);
 });
 
 test('hasAttribute()', t => {
-  const actual = queryDom('<div foo="bar"></div>');
+  const actual = parseFragment('<div foo="bar"></div>').childNodes[0];
   t.is(
-    actual[0].hasAttribute('does-not-exists'),
+    actual.hasAttribute('does-not-exists'),
     false,
     'none existing attribute'
   );
   t.is(
-    actual[0].hasAttribute('does-not-exists'),
+    actual.hasAttribute('does-not-exists'),
     false,
     'none existing attribute (cached)'
   );
-  t.is(actual[0].hasAttribute('foo'), true, 'existing attribute');
-  t.is(actual[0].hasAttribute('foo'), true, 'existing attribute (cached)');
+  t.is(actual.hasAttribute('foo'), true, 'existing attribute');
+  t.is(actual.hasAttribute('foo'), true, 'existing attribute (cached)');
 });
 
 test('getElementsByTagName()', t => {
-  const actual = queryDom(`<div>
+  const fragment = parseFragment(`<div>
     <foo></foo>
     <beep><foo></foo></beep>
-  </div>`)[0].getElementsByTagName('foo');
+  </div>`);
+  const actual = fragment.getElementsByTagName('foo');
   t.is(actual.length, 2);
   t.is(actual[0].tagName, 'foo');
   t.is(actual[0].parentNode.tagName, 'div');
@@ -71,10 +72,10 @@ test('getElementsByTagName()', t => {
 });
 
 test('getElementsByTagName() tricky', t => {
-  const actual = queryDom(`<div>
+  const actual = parseFragment(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
-  </div>`)[0].getElementsByTagName('foo');
+  </div>`).getElementsByTagName('foo');
   t.is(actual.length, 2);
   t.is(actual[0].tagName, 'foo');
   t.is(actual[0].parentNode.tagName, 'beep');
@@ -83,11 +84,11 @@ test('getElementsByTagName() tricky', t => {
 });
 
 test('classList.contains()', t => {
-  const actual = queryDom(tsml`
+  const actual = parseFragment(tsml`
     <div></div>
     <div class="foo"></div>
     <div class="foo bar"></div>
-  `);
+  `).childNodes;
 
   t.deepEqual(actual.length, 3);
 
@@ -100,7 +101,7 @@ test('classList.contains()', t => {
 });
 
 test('classList.contains() whitespace in className', t => {
-  const actual = queryDom('<div class="  foo   bar  "/>')[0].classList;
+  const actual = parseFragment('<div class="  foo   bar  "/>').childNodes[0].classList;
 
   t.truthy(actual.contains('foo'));
   t.truthy(actual.contains('bar'));
@@ -109,7 +110,7 @@ test('classList.contains() whitespace in className', t => {
 });
 
 test('style - single statement', t => {
-  const actual = queryDom('<div style="font-size: 14px"></div>')[0].style;
+  const actual = parseFragment('<div style="font-size: 14px"></div>').childNodes[0].style;
   const expected = {
     fontSize: '14px'
   };
@@ -117,7 +118,7 @@ test('style - single statement', t => {
 });
 
 test('style - multiple statements', t => {
-  const actual = queryDom(tsml`
+  const actual = parseFragment(tsml`
     <div style="
       -webkit-border-radius: 10px;
       -moz-border-radius: 10px;
@@ -126,7 +127,7 @@ test('style - multiple statements', t => {
       border-color: ;
       : red;
     "></div>
-  `)[0].style;
+  `).childNodes[0].style;
   const expected = {
     WebkitBorderRadius: '10px',
     MozBorderRadius: '10px',
@@ -137,13 +138,13 @@ test('style - multiple statements', t => {
 });
 
 test('style - no style', t => {
-  const actual = queryDom('<div></div>')[0].style;
+  const actual = parseFragment('<div></div>').childNodes[0].style;
   const expected = {};
   t.deepEqual(actual, expected);
 });
 
 test('style - invalid', t => {
-  const actual = queryDom('<div style="foo"></div>')[0].style;
+  const actual = parseFragment('<div style="foo"></div>').childNodes[0].style;
   const expected = {};
   t.deepEqual(actual, expected);
 });
@@ -152,7 +153,7 @@ test('text element', t => {
   const expectedNodeName = '#text';
   const expectedData = 'beep boop';
 
-  const actual = queryDom('beep boop')[0];
+  const actual = parseFragment('beep boop').childNodes[0];
   const actualNodeName = actual.nodeName;
   const actualData = actual.data;
 
@@ -160,11 +161,11 @@ test('text element', t => {
   t.is(actualData, expectedData);
 });
 
-test('querySelectorAll()', t => {
-  const actual = queryDom(`<div>
+test('parseFragment().querySelectorAll()', t => {
+  const actual = parseFragment(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
-  </div>`)[0].querySelectorAll('foo');
+  </div>`).querySelectorAll('foo');
   t.is(actual.length, 2);
   t.is(actual[0].tagName, 'foo');
   t.is(actual[0].parentNode.tagName, 'beep');
@@ -172,12 +173,56 @@ test('querySelectorAll()', t => {
   t.is(actual[1].parentNode.tagName, 'div');
 });
 
-test('querySelector()', t => {
-  const actual = queryDom(`<div>
+test('parse().querySelectorAll()', t => {
+  const actual = parse(`<div>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('foo');
+  t.is(actual.length, 2);
+  t.is(actual[0].tagName, 'foo');
+  t.is(actual[0].parentNode.tagName, 'beep');
+  t.is(actual[1].tagName, 'foo');
+  t.is(actual[1].parentNode.tagName, 'div');
+});
+
+test('element.querySelectorAll()', t => {
+  const actual = parseFragment(`<div>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`).childNodes[0].querySelectorAll('foo');
+  t.is(actual.length, 2);
+  t.is(actual[0].tagName, 'foo');
+  t.is(actual[0].parentNode.tagName, 'beep');
+  t.is(actual[1].tagName, 'foo');
+  t.is(actual[1].parentNode.tagName, 'div');
+});
+
+test('parseFragment().querySelector()', t => {
+  const actual = parseFragment(`<div>
     <flipp><flopp></flopp></flipp>
     <beep><foo></foo></beep>
     <foo></foo>
-  </div>`)[0].querySelector('foo');
+  </div>`).querySelector('foo');
+  t.is(actual.tagName, 'foo');
+  t.is(actual.parentNode.tagName, 'beep');
+});
+
+test('parse().querySelector()', t => {
+  const actual = parse(`<div>
+    <flipp><flopp></flopp></flipp>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`).querySelector('foo');
+  t.is(actual.tagName, 'foo');
+  t.is(actual.parentNode.tagName, 'beep');
+});
+
+test('element().querySelector()', t => {
+  const actual = parseFragment(`<div>
+    <flipp><flopp></flopp></flipp>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`).childNodes[0].querySelector('foo');
   t.is(actual.tagName, 'foo');
   t.is(actual.parentNode.tagName, 'beep');
 });
