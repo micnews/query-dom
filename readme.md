@@ -33,13 +33,14 @@ npm test
 ## Dependencies
 
 - [camelcase-css](https://github.com/stevenvachon/camelcase-css): Convert a dash-separated CSS property to a camelCased DOM property.
+- [cssauron-html](https://github.com/chrisdickinson/cssauron-html): css sauron config for html
 - [object-assign](https://github.com/sindresorhus/object-assign): ES6 Object.assign() ponyfill
 - [parse5](https://github.com/inikulin/parse5): WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.js
 - [to-fast-properties](https://github.com/sindresorhus/to-fast-properties): Force V8 to use fast properties for an object
 
 ## Dev Dependencies
 
-- [ava](https://github.com/sindresorhus/ava): Futuristic test runner 🚀
+- [ava](https://github.com/avajs/ava): Futuristic test runner 🚀
 - [babel-cli](https://github.com/babel/babel/tree/master/packages): Babel command line.
 - [babel-core](https://github.com/babel/babel/tree/master/packages): Babel compiler core.
 - [babel-preset-es2015](https://github.com/babel/babel/tree/master/packages): Babel preset for all es2015 plugins.

@@ -159,3 +159,24 @@ test('text element', t => {
   t.is(actualNodeName, expectedNodeName);
   t.is(actualData, expectedData);
 });
+
+test('querySelectorAll()', t => {
+  const actual = queryDom(`<div>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`)[0].querySelectorAll('foo');
+  t.is(actual.length, 2);
+  t.is(actual[0].tagName, 'foo');
+  t.is(actual[0].parentNode.tagName, 'beep');
+  t.is(actual[1].tagName, 'foo');
+  t.is(actual[1].parentNode.tagName, 'div');
+});
+
+test('querySelector()', t => {
+  const actual = queryDom(`<div>
+    <beep><foo></foo></beep>
+    <foo></foo>
+  </div>`)[0].querySelector('foo');
+  t.is(actual.tagName, 'foo');
+  t.is(actual.parentNode.tagName, 'beep');
+});
