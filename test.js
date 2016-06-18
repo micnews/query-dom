@@ -174,6 +174,7 @@ test('querySelectorAll()', t => {
 
 test('querySelector()', t => {
   const actual = queryDom(`<div>
+    <flipp><flopp></flopp></flipp>
     <beep><foo></foo></beep>
     <foo></foo>
   </div>`)[0].querySelector('foo');
