@@ -1,7 +1,9 @@
 import test from 'ava';
 import 'babel-core/register';
-import {parse, parseFragment} from './lib';
+import legacy from './lib';
 import tsml from 'tsml';
+
+const {parse, parseFragment} = legacy;
 
 test('tagNames & nodeNames are lower case', t => {
   const actual = parseFragment('<div></div><DIV></DIV>').childNodes;
@@ -225,4 +227,15 @@ test('element().querySelector()', t => {
   </div>`).childNodes[0].querySelector('foo');
   t.is(actual.tagName, 'foo');
   t.is(actual.parentNode.tagName, 'beep');
+});
+
+test('legacy', t => {
+  const html = tsml`
+    <flipp><flopp></flopp></flipp>
+    <beep><foo></foo></beep>
+  `;
+  const actual = legacy(html);
+  const expected = parseFragment(html).childNodes;
+
+  t.deepEqual(actual, expected);
 });
