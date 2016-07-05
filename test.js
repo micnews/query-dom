@@ -229,6 +229,20 @@ test('element().querySelector()', t => {
   t.is(actual.parentNode.tagName, 'beep');
 });
 
+test('element().innerHTML', t => {
+  const innerHTML = '<flipp hello="world"><flopp foo="bar">text</flopp></flipp>';
+  const actual = parseFragment(`<div>${innerHTML}</div>`).childNodes[0].innerHTML;
+  const expected = innerHTML;
+  t.is(expected, actual);
+});
+
+test('element().outerHTML', t => {
+  const outerHTML = '<div><flipp hello="world"><flopp foo="bar">text</flopp></flipp></div>';
+  const actual = parseFragment(outerHTML).childNodes[0].outerHTML;
+  const expected = outerHTML;
+  t.is(expected, actual);
+});
+
 test('legacy', t => {
   const html = tsml`
     <flipp><flopp></flopp></flipp>
