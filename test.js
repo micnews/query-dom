@@ -243,6 +243,44 @@ test('element().outerHTML', t => {
   t.is(expected, actual);
 });
 
+test('#text.textContent', t => {
+  const actual = parseFragment('beep beep').childNodes[0].textContent;
+  const expected = 'beep beep';
+  t.is(actual, expected);
+});
+
+test('element().textContent', t => {
+  const actual = parseFragment(tsml`
+    <div><flipp>Foo <flopp>Bar</flopp></flipp>Fred</div>
+  `).childNodes[0].textContent;
+  const expected = 'Foo BarFred';
+  t.is(actual, expected);
+});
+
+test('element().textContent preserves whitespace', t => {
+  const actual = parseFragment(`<div>
+    <flipp>Foo
+      <flopp>Bar</flopp>
+    </flipp>
+    Fred
+  </div>`).childNodes[0].textContent;
+  const expected = '\n    Foo\n      Bar\n    \n    Fred\n  ';
+  t.is(actual, expected);
+});
+
+test('document().textContent is null', t => {
+  const actual = parse(`<!DOCTYPE html5>
+    <p>Hello</p>
+  </div>`).textContent;
+  t.is(actual, null);
+});
+
+test('documentFragment().textContent is null', t => {
+  const actual = parseFragment(`<p>Hello</p>
+  </div>`).textContent;
+  t.is(actual, null);
+});
+
 test('legacy', t => {
   const html = tsml`
     <flipp><flopp></flopp></flipp>
