@@ -32,7 +32,7 @@
     "jsdom": "^9.1.0",
     "minidom": "^1.0.0",
     "npm-run-all": "^2.1.1",
-    "nyc": "^7.0.0",
+    "nyc": "^8.0.0",
     "package-json-to-readme": "^1.5.0",
     "semistandard": "^8.0.0",
     "snazzy": "^4.0.0",
