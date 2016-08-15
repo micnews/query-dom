@@ -40,7 +40,7 @@ npm test
 
 - [camelcase-css](https://github.com/stevenvachon/camelcase-css): Convert a dash-separated CSS property to a camelCased DOM property.
 - [cssauron-html](https://github.com/chrisdickinson/cssauron-html): css sauron config for html
-- [object-assign](https://github.com/sindresorhus/object-assign): ES6 Object.assign() ponyfill
+- [object-assign](https://github.com/sindresorhus/object-assign): ES2015 Object.assign() ponyfill
 - [parse5](https://github.com/inikulin/parse5): WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.js
 - [to-fast-properties](https://github.com/sindresorhus/to-fast-properties): Force V8 to use fast properties for an object
 
@@ -54,7 +54,7 @@ npm test
 - [jsdom](https://github.com/tmpvar/jsdom): A JavaScript implementation of the DOM and HTML standards
 - [minidom](https://github.com/montagejs/minidom): Small DOM level 1 implementation
 - [npm-run-all](https://github.com/mysticatea/npm-run-all): A CLI tool to run multiple npm-scripts in parallel or sequential.
-- [nyc](https://github.com/bcoe/nyc): a code coverage tool that works well with subprocesses.
+- [nyc](https://github.com/bcoe/nyc): the Istanbul command line interface
 - [package-json-to-readme](https://github.com/zeke/package-json-to-readme): Generate a README.md from package.json contents
 - [semistandard](https://github.com/Flet/semistandard): All the goodness of `feross/standard` with semicolons sprinkled on top.
 - [snazzy](https://github.com/feross/snazzy): Format JavaScript Standard Style as Stylish (i.e. snazzy) output
