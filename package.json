@@ -31,7 +31,7 @@
     "devtool": "^2.0.2",
     "jsdom": "^9.1.0",
     "minidom": "^1.0.0",
-    "npm-run-all": "^2.1.1",
+    "npm-run-all": "^3.0.0",
     "nyc": "^8.1.0",
     "package-json-to-readme": "^1.5.0",
     "semistandard": "^8.0.0",
