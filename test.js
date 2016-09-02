@@ -281,6 +281,16 @@ test('documentFragment().textContent is null', t => {
   t.is(actual, null);
 });
 
+test('parse().querySelectorAll(attr)', t => {
+  const actual = parse(`<div>
+    <beep><foo data-name="foo"></foo></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('[data-name="foo"]');
+  t.is(actual.length, 1);
+  t.is(actual[0].tagName, 'foo');
+  t.is(actual[0].parentNode.tagName, 'beep');
+});
+
 test('legacy', t => {
   const html = tsml`
     <flipp><flopp></flopp></flipp>
