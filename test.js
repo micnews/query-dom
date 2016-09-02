@@ -281,14 +281,71 @@ test('documentFragment().textContent is null', t => {
   t.is(actual, null);
 });
 
-test('parse().querySelectorAll(attr)', t => {
+test('parse().querySelectorAll(#id)', t => {
   const actual = parse(`<div>
-    <beep><foo data-name="foo"></foo></beep>
+    <beep><foo id="bar"></foo></beep>
     <foo></foo>
-  </div>`).querySelectorAll('[data-name="foo"]');
+  </div>`).querySelectorAll('#bar');
   t.is(actual.length, 1);
   t.is(actual[0].tagName, 'foo');
-  t.is(actual[0].parentNode.tagName, 'beep');
+});
+
+test('parse().querySelectorAll(.class)', t => {
+  const actual = parse(`<div>
+    <beep><foo class="bar"></foo></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('.bar');
+  t.is(actual.length, 1);
+  t.is(actual[0].tagName, 'foo');
+});
+
+test('parse().querySelectorAll(tag > #id)', t => {
+  const actual = parse(`<div>
+    <beep><foo id="bar"></foo></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('beep #bar');
+  t.is(actual.length, 1);
+  t.is(actual[0].tagName, 'foo');
+});
+
+test('parse().querySelectorAll(tag + tag)', t => {
+  const actual = parse(`<div>
+    <beep><span></span><foo></foo></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('span + foo');
+  t.is(actual.length, 1);
+  t.is(actual[0].tagName, 'foo');
+});
+
+test('parse().querySelectorAll([attr=value])', t => {
+  const actual = parse(`<div>
+    <beep><foo data-name="bar"></foo></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('[data-name="bar"]');
+  t.is(actual.length, 1);
+  t.is(actual[0].getAttribute('data-name'), 'bar');
+});
+
+test('parse().querySelectorAll([attr^=value])', t => {
+  const actual = parse(`<div>
+    <beep><foo data-name="foo-bar"></foo></beep>
+    <beep><bar data-name="bar-foo"></bar></beep>
+    <foo></foo>
+  </div>`).querySelectorAll('[data-name^="foo"]');
+  t.is(actual.length, 1);
+  t.is(actual[0].tagName, 'foo');
+  t.is(actual[0].getAttribute('data-name'), 'foo-bar');
+});
+
+test('parse().querySelectorAll(:contains())', t => {
+  const actual = parse(`<div>
+    <beep>qux it</beep>
+    <beep><bar></bar>it qux</beep>
+    <foo>quuux</foo>
+  </div>`).querySelectorAll('beep:contains("qux")');
+  t.is(actual.length, 2);
+  t.is(actual[0].textContent, 'qux it');
+  t.is(actual[1].textContent, 'it qux');
 });
 
 test('legacy', t => {
