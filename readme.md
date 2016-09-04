@@ -39,7 +39,7 @@ npm test
 ## Dependencies
 
 - [camelcase-css](https://github.com/stevenvachon/camelcase-css): Convert a dash-separated CSS property to a camelCased DOM property.
-- [cssauron-html](https://github.com/chrisdickinson/cssauron-html): css sauron config for html
+- [cssauron](https://github.com/chrisdickinson/cssauron): create matching selectors from css for your very own nested object hierarchy
 - [object-assign](https://github.com/sindresorhus/object-assign): ES2015 Object.assign() ponyfill
 - [parse5](https://github.com/inikulin/parse5): WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.js
 - [to-fast-properties](https://github.com/sindresorhus/to-fast-properties): Force V8 to use fast properties for an object
