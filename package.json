@@ -42,7 +42,7 @@
     "camelcase-css": "^1.0.0",
     "cssauron": "^1.4.0",
     "object-assign": "^4.0.1",
-    "parse5": "^2.1.5",
+    "parse5": "^2.2.3",
     "to-fast-properties": "^1.0.1"
   }
 }
