@@ -1,4 +1,6 @@
-import {parse, parseFragment} from 'query-dom';
+/* eslint-disable */
+
+import { parse, parseFragment } from 'query-dom';
 
 const document = parse('<div><foo style="font-size: 12px" class="bar"></foo></div>');
 const child = document.getElementsByTagName('foo')[0];

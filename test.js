@@ -1,11 +1,14 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import test from 'ava';
 import 'babel-core/register';
-import legacy from './lib';
 import tsml from 'tsml';
 
-const {parse, parseFragment} = legacy;
+import legacy from './lib';
 
-test('tagNames & nodeNames are lower case', t => {
+const { parse, parseFragment } = legacy;
+
+test('tagNames & nodeNames are lower case', (t) => {
   const actual = parseFragment('<div></div><DIV></DIV>').childNodes;
 
   t.is(actual.length, 2);
@@ -15,7 +18,7 @@ test('tagNames & nodeNames are lower case', t => {
   t.is(actual[1].nodeName, 'div');
 });
 
-test('nested has correct tagNames & nodeNames', t => {
+test('nested has correct tagNames & nodeNames', (t) => {
   const actual = parseFragment('<div><span></span></div>').childNodes;
 
   t.is(actual.length, 1);
@@ -26,7 +29,7 @@ test('nested has correct tagNames & nodeNames', t => {
   t.is(actual[0].childNodes[0].nodeName, 'span');
 });
 
-test('getAttribute()', t => {
+test('getAttribute()', (t) => {
   const actual = parseFragment('<div foo="bar"></div>').childNodes;
   t.is(actual[0].getAttribute('does-not-exists'), null, 'none existing attribute');
   t.is(
@@ -38,13 +41,13 @@ test('getAttribute()', t => {
   t.is(actual[0].getAttribute('foo'), 'bar', 'existing attribute (cached)');
 });
 
-test('attributes', t => {
+test('attributes', (t) => {
   const actual = parseFragment('<div foo="bar"></div>').childNodes[0].attributes;
-  const expected = [{name: 'foo', value: 'bar'}];
+  const expected = [{ name: 'foo', value: 'bar' }];
   t.deepEqual(actual, expected);
 });
 
-test('hasAttribute()', t => {
+test('hasAttribute()', (t) => {
   const actual = parseFragment('<div foo="bar"></div>').childNodes[0];
   t.is(
     actual.hasAttribute('does-not-exists'),
@@ -60,7 +63,7 @@ test('hasAttribute()', t => {
   t.is(actual.hasAttribute('foo'), true, 'existing attribute (cached)');
 });
 
-test('getElementsByTagName()', t => {
+test('getElementsByTagName()', (t) => {
   const fragment = parseFragment(`<div>
     <foo></foo>
     <beep><foo></foo></beep>
@@ -73,7 +76,7 @@ test('getElementsByTagName()', t => {
   t.is(actual[1].parentNode.tagName, 'beep');
 });
 
-test('getElementsByTagName() tricky', t => {
+test('getElementsByTagName() tricky', (t) => {
   const actual = parseFragment(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
@@ -85,7 +88,7 @@ test('getElementsByTagName() tricky', t => {
   t.is(actual[1].parentNode.tagName, 'div');
 });
 
-test('classList.contains()', t => {
+test('classList.contains()', (t) => {
   const actual = parseFragment(tsml`
     <div></div>
     <div class="foo"></div>
@@ -102,7 +105,7 @@ test('classList.contains()', t => {
   t.falsy(actual[2].classList.contains('bas'));
 });
 
-test('classList.contains() whitespace in className', t => {
+test('classList.contains() whitespace in className', (t) => {
   const actual = parseFragment('<div class="  foo   bar  "/>').childNodes[0].classList;
 
   t.truthy(actual.contains('foo'));
@@ -111,7 +114,7 @@ test('classList.contains() whitespace in className', t => {
   t.falsy(actual.contains(' '));
 });
 
-test('style - single statement', t => {
+test('style - single statement', (t) => {
   const actual = parseFragment('<div style="font-size: 14px"></div>').childNodes[0].style;
   const expected = {
     fontSize: '14px'
@@ -119,7 +122,7 @@ test('style - single statement', t => {
   t.deepEqual(actual, expected);
 });
 
-test('style - multiple statements', t => {
+test('style - multiple statements', (t) => {
   const actual = parseFragment(tsml`
     <div style="
       -webkit-border-radius: 10px;
@@ -139,19 +142,19 @@ test('style - multiple statements', t => {
   t.deepEqual(actual, expected);
 });
 
-test('style - no style', t => {
+test('style - no style', (t) => {
   const actual = parseFragment('<div></div>').childNodes[0].style;
   const expected = {};
   t.deepEqual(actual, expected);
 });
 
-test('style - invalid', t => {
+test('style - invalid', (t) => {
   const actual = parseFragment('<div style="foo"></div>').childNodes[0].style;
   const expected = {};
   t.deepEqual(actual, expected);
 });
 
-test('text element', t => {
+test('text element', (t) => {
   const expectedNodeName = '#text';
   const expectedData = 'beep boop';
 
@@ -163,7 +166,7 @@ test('text element', t => {
   t.is(actualData, expectedData);
 });
 
-test('parseFragment().querySelectorAll()', t => {
+test('parseFragment().querySelectorAll()', (t) => {
   const actual = parseFragment(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
@@ -175,7 +178,7 @@ test('parseFragment().querySelectorAll()', t => {
   t.is(actual[1].parentNode.tagName, 'div');
 });
 
-test('parse().querySelectorAll()', t => {
+test('parse().querySelectorAll()', (t) => {
   const actual = parse(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
@@ -187,7 +190,7 @@ test('parse().querySelectorAll()', t => {
   t.is(actual[1].parentNode.tagName, 'div');
 });
 
-test('element.querySelectorAll()', t => {
+test('element.querySelectorAll()', (t) => {
   const actual = parseFragment(`<div>
     <beep><foo></foo></beep>
     <foo></foo>
@@ -199,7 +202,7 @@ test('element.querySelectorAll()', t => {
   t.is(actual[1].parentNode.tagName, 'div');
 });
 
-test('parseFragment().querySelector()', t => {
+test('parseFragment().querySelector()', (t) => {
   const actual = parseFragment(`<div>
     <flipp><flopp></flopp></flipp>
     <beep><foo></foo></beep>
@@ -209,7 +212,7 @@ test('parseFragment().querySelector()', t => {
   t.is(actual.parentNode.tagName, 'beep');
 });
 
-test('parse().querySelector()', t => {
+test('parse().querySelector()', (t) => {
   const actual = parse(`<div>
     <flipp><flopp></flopp></flipp>
     <beep><foo></foo></beep>
@@ -219,7 +222,7 @@ test('parse().querySelector()', t => {
   t.is(actual.parentNode.tagName, 'beep');
 });
 
-test('element().querySelector()', t => {
+test('element().querySelector()', (t) => {
   const actual = parseFragment(`<div>
     <flipp><flopp></flopp></flipp>
     <beep><foo></foo></beep>
@@ -229,27 +232,27 @@ test('element().querySelector()', t => {
   t.is(actual.parentNode.tagName, 'beep');
 });
 
-test('element().innerHTML', t => {
+test('element().innerHTML', (t) => {
   const innerHTML = '<flipp hello="world"><flopp foo="bar">text</flopp></flipp>';
   const actual = parseFragment(`<div>${innerHTML}</div>`).childNodes[0].innerHTML;
   const expected = innerHTML;
   t.is(expected, actual);
 });
 
-test('element().outerHTML', t => {
+test('element().outerHTML', (t) => {
   const outerHTML = '<div><flipp hello="world"><flopp foo="bar">text</flopp></flipp></div>';
   const actual = parseFragment(outerHTML).childNodes[0].outerHTML;
   const expected = outerHTML;
   t.is(expected, actual);
 });
 
-test('#text.textContent', t => {
+test('#text.textContent', (t) => {
   const actual = parseFragment('beep beep').childNodes[0].textContent;
   const expected = 'beep beep';
   t.is(actual, expected);
 });
 
-test('element().textContent', t => {
+test('element().textContent', (t) => {
   const actual = parseFragment(tsml`
     <div><flipp>Foo <flopp>Bar</flopp></flipp>Fred</div>
   `).childNodes[0].textContent;
@@ -257,7 +260,7 @@ test('element().textContent', t => {
   t.is(actual, expected);
 });
 
-test('element().textContent preserves whitespace', t => {
+test('element().textContent preserves whitespace', (t) => {
   const actual = parseFragment(`<div>
     <flipp>Foo
       <flopp>Bar</flopp>
@@ -268,20 +271,20 @@ test('element().textContent preserves whitespace', t => {
   t.is(actual, expected);
 });
 
-test('document().textContent is null', t => {
+test('document().textContent is null', (t) => {
   const actual = parse(`<!DOCTYPE html5>
     <p>Hello</p>
   </div>`).textContent;
   t.is(actual, null);
 });
 
-test('documentFragment().textContent is null', t => {
+test('documentFragment().textContent is null', (t) => {
   const actual = parseFragment(`<p>Hello</p>
   </div>`).textContent;
   t.is(actual, null);
 });
 
-test('parse().querySelectorAll(#id)', t => {
+test('parse().querySelectorAll(#id)', (t) => {
   const actual = parse(`<div>
     <beep><foo id="bar"></foo></beep>
     <foo></foo>
@@ -290,7 +293,7 @@ test('parse().querySelectorAll(#id)', t => {
   t.is(actual[0].tagName, 'foo');
 });
 
-test('parse().querySelectorAll(.class)', t => {
+test('parse().querySelectorAll(.class)', (t) => {
   const actual = parse(`<div>
     <beep><foo class="bar"></foo></beep>
     <foo></foo>
@@ -299,7 +302,7 @@ test('parse().querySelectorAll(.class)', t => {
   t.is(actual[0].tagName, 'foo');
 });
 
-test('parse().querySelectorAll(tag > #id)', t => {
+test('parse().querySelectorAll(tag > #id)', (t) => {
   const actual = parse(`<div>
     <beep><foo id="bar"></foo></beep>
     <foo></foo>
@@ -308,7 +311,7 @@ test('parse().querySelectorAll(tag > #id)', t => {
   t.is(actual[0].tagName, 'foo');
 });
 
-test('parse().querySelectorAll(tag + tag)', t => {
+test('parse().querySelectorAll(tag + tag)', (t) => {
   const actual = parse(`<div>
     <beep><span></span><foo></foo></beep>
     <foo></foo>
@@ -317,7 +320,7 @@ test('parse().querySelectorAll(tag + tag)', t => {
   t.is(actual[0].tagName, 'foo');
 });
 
-test('parse().querySelectorAll([attr=value])', t => {
+test('parse().querySelectorAll([attr=value])', (t) => {
   const actual = parse(`<div>
     <beep><foo data-name="bar"></foo></beep>
     <foo></foo>
@@ -326,7 +329,7 @@ test('parse().querySelectorAll([attr=value])', t => {
   t.is(actual[0].getAttribute('data-name'), 'bar');
 });
 
-test('parse().querySelectorAll([attr^=value])', t => {
+test('parse().querySelectorAll([attr^=value])', (t) => {
   const actual = parse(`<div>
     <beep><foo data-name="foo-bar"></foo></beep>
     <beep><bar data-name="bar-foo"></bar></beep>
@@ -337,7 +340,7 @@ test('parse().querySelectorAll([attr^=value])', t => {
   t.is(actual[0].getAttribute('data-name'), 'foo-bar');
 });
 
-test('parse().querySelectorAll(:contains())', t => {
+test('parse().querySelectorAll(:contains())', (t) => {
   const actual = parse(`<div>
     <beep>qux it</beep>
     <beep><bar></bar>it qux</beep>
@@ -348,7 +351,7 @@ test('parse().querySelectorAll(:contains())', t => {
   t.is(actual[1].textContent, 'it qux');
 });
 
-test('legacy', t => {
+test('legacy', (t) => {
   const html = tsml`
     <flipp><flopp></flopp></flipp>
     <beep><foo></foo></beep>

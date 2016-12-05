@@ -13,7 +13,9 @@ npm install query-dom --save
 ## Usage
 
 ```js
-import {parse, parseFragment} from 'query-dom';
+/* eslint-disable */
+
+import { parse, parseFragment } from 'query-dom';
 
 const document = parse('<div><foo style="font-size: 12px" class="bar"></foo></div>');
 const child = document.getElementsByTagName('foo')[0];
@@ -40,23 +42,23 @@ npm test
 
 - [camelcase-css](https://github.com/stevenvachon/camelcase-css): Convert a dash-separated CSS property to a camelCased DOM property.
 - [cssauron](https://github.com/chrisdickinson/cssauron): create matching selectors from css for your very own nested object hierarchy
-- [object-assign](https://github.com/sindresorhus/object-assign): ES2015 Object.assign() ponyfill
+- [object-assign](): ES2015 Object.assign() ponyfill
 - [parse5](https://github.com/inikulin/parse5): WHATWG HTML5 specification-compliant, fast and ready for production HTML parsing/serialization toolset for Node.js
-- [to-fast-properties](https://github.com/sindresorhus/to-fast-properties): Force V8 to use fast properties for an object
+- [to-fast-properties](): Force V8 to use fast properties for an object
 
 ## Dev Dependencies
 
-- [ava](https://github.com/avajs/ava): Futuristic test runner 🚀
-- [babel-cli](https://github.com/babel/babel/tree/master/packages): Babel command line.
-- [babel-core](https://github.com/babel/babel/tree/master/packages): Babel compiler core.
-- [babel-preset-es2015](https://github.com/babel/babel/tree/master/packages): Babel preset for all es2015 plugins.
+- [ava](): Futuristic test runner 🚀
+- [babel-cli](): Babel command line.
+- [babel-core](): Babel compiler core.
+- [babel-preset-es2015](): Babel preset for all es2015 plugins.
 - [devtool](https://github.com/Jam3/devtool): runs Node.js programs through Chromium DevTools
-- [jsdom](https://github.com/tmpvar/jsdom): A JavaScript implementation of the DOM and HTML standards
+- [jsdom](): A JavaScript implementation of the DOM and HTML standards
+- [miclint](https://github.com/micnews/miclint): mic lint cli
 - [minidom](https://github.com/montagejs/minidom): Small DOM level 1 implementation
 - [npm-run-all](https://github.com/mysticatea/npm-run-all): A CLI tool to run multiple npm-scripts in parallel or sequential.
-- [nyc](https://github.com/bcoe/nyc): the Istanbul command line interface
+- [nyc](https://github.com/istanbuljs/nyc): the Istanbul command line interface
 - [package-json-to-readme](https://github.com/zeke/package-json-to-readme): Generate a README.md from package.json contents
-- [semistandard](https://github.com/Flet/semistandard): All the goodness of `feross/standard` with semicolons sprinkled on top.
 - [snazzy](https://github.com/feross/snazzy): Format JavaScript Standard Style as Stylish (i.e. snazzy) output
 - [tsml](https://github.com/rvagg/tsml): ES6 template string tag for multi-line cleaning - squash multi-line strings into a single line
 

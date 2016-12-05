@@ -1,6 +1,9 @@
+/* eslint-disable no-console */
+
+import { readFileSync } from 'fs';
+import { join } from 'path';
+
 import queryDom from '../lib/index';
-import {readFileSync} from 'fs';
-import {join} from 'path';
 
 const input = readFileSync(
   join(__dirname, 'example.html'),
@@ -13,7 +16,7 @@ if (console.profile) {
 let start = new Date();
 let count = 0;
 while (new Date() - start < 5000) {
-  count++;
+  count += 1;
   queryDom(input);
 }
 let diff = (new Date() - start) / count;
@@ -32,8 +35,8 @@ if (console.profile) {
 start = new Date();
 count = 0;
 while (new Date() - start < 5000) {
-  for (let i = 0; i < 1000; ++i) {
-    count++;
+  for (let i = 0; i < 1000; i += 1) {
+    count += 1;
     dom[0].getElementsByTagName('div');
   }
 }
