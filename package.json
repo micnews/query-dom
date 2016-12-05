@@ -4,7 +4,7 @@
   "description": "query-focused & somewhat standards compliant subset of the DOM",
   "main": "dist/lib/index.js",
   "scripts": {
-    "test": "semistandard | snazzy && nyc ava",
+    "test": "miclint | snazzy && nyc ava",
     "benchmark:build": "mkdir -p dist && babel benchmark --out-dir dist/benchmark",
     "benchmark:compare": "npm-run-all --parallel benchmark:build build && node dist/benchmark/compare.js",
     "benchmark:devtool": "npm-run-all --parallel benchmark:build build && devtool dist/benchmark/benchmark.js",
@@ -30,11 +30,11 @@
     "babel-preset-es2015": "^6.3.13",
     "devtool": "^2.0.2",
     "jsdom": "^9.1.0",
+    "miclint": "^2.0.0",
     "minidom": "^1.0.0",
     "npm-run-all": "^3.1.0",
     "nyc": "^10.0.0",
     "package-json-to-readme": "^1.5.0",
-    "semistandard": "^9.0.0",
     "snazzy": "^5.0.0",
     "tsml": "^1.0.1"
   },
@@ -42,7 +42,7 @@
     "camelcase-css": "^1.0.0",
     "cssauron": "^1.4.0",
     "object-assign": "^4.0.1",
-    "parse5": "^2.1.5",
+    "parse5": "^3.0.0",
     "to-fast-properties": "^1.0.1"
   }
 }
